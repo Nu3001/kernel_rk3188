@@ -1431,6 +1431,10 @@ int gpio_direction_output(unsigned gpio, int value)
 	struct gpio_desc	*desc = &gpio_desc[gpio];
 	int			status = -EINVAL;
 
+	if (gpio == RK30_PIN0_PC6)
+	{
+		printk("dzwei, RK30_PIN0_PC6 is outputting to %d", value);
+	}
 	spin_lock_irqsave(&gpio_lock, flags);
 
 	if (value !=0 && value !=1)
@@ -1647,6 +1651,11 @@ void __gpio_set_value(unsigned gpio, int value)
 {
 	struct gpio_chip	*chip;
 
+	if (gpio == RK30_PIN0_PC6)
+	{
+		printk("dzwei, RK30_PIN0_PC6 is setting to %d", value);
+	}
+	
 	if(value !=0 && value !=1)
 		return;
 	if (!gpio_is_valid(gpio))

@@ -353,7 +353,7 @@ static int hid_submit_ctrl(struct hid_device *hid)
 			usbhid->urbctrl->transfer_buffer_length = len;
 			memcpy(usbhid->ctrlbuf, raw_report, len);
 			kfree(raw_report);
-		} else {
+		} else {/*
 			int maxpacket, padlen;
 
 			usbhid->urbctrl->pipe = usb_rcvctrlpipe(hid_to_usb_dev(hid), 0);
@@ -365,7 +365,8 @@ static int hid_submit_ctrl(struct hid_device *hid)
 					padlen = usbhid->bufsize;
 			} else
 				padlen = 0;
-			usbhid->urbctrl->transfer_buffer_length = padlen;
+			usbhid->urbctrl->transfer_buffer_length = padlen;*/
+			return -1;
 		}
 		usbhid->urbctrl->dev = hid_to_usb_dev(hid);
 
