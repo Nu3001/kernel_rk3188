@@ -1498,16 +1498,16 @@ void receive_int_char(unsigned char ch)
 	}
 }
 #else
-//=============================================================================
-// 下面的代码根据上面的代码进行改写和优化
-// 最初接收数据并查找数据帧时,优先考虑连续双0xFA,即搜索到连续双0xFA即认为是
-// 一帧的开始,但这样的解析有一个问题:即数据帧中包含连续双0xFA,则会把数据中的
-// 双0xFA误认为是新一帧的开始,导致无法正确接收含有双0xFA的数据帧
-// 针对这个bug,张彪对原有代码进行了改写,即上面的代码
-// 上面的代码也有一个问题,即当一个数据帧有部分数据丢失时,该数据帧后续的那个
-// 数据帧中的数据会被当作前一帧的数据来出来.这样一旦有一帧数据不全,会导致
-// 后续的数据帧也受影响
-//-----------------------------------------------------------------------------
+// =============================================================================
+// The following code rewritten and optimized in accordance with the above code
+// Initially receives the data and find the time frame , priorities bicontinuous 0xFA, namely the search to the continuous double 0xFA that is considered to be
+// start of a frame, but this resolution has a problem : the data frame contains double continuous 0xFA, is the data
+// Double 0xFA mistaken beginning of a new frame, making it impossible to receive data frames with double 0xFA right
+// For this bug, Zhang Biao original code has been rewritten, the above code
+// The code above also has a problem in that when a data frame , some data is lost , the data of the subsequent frame
+// The data frame will be treated as the previous frame data out so that if there is a frame of data was incomplete, would lead to
+// subsequent data frame also being affected
+// ------------------------------------------------ -----------------------------
 // dzwei, 2014-8-1
 //=============================================================================
 int check_frame_validation(void)
@@ -1570,8 +1570,8 @@ void receive_int_char(unsigned char ch)
 	{
 		if (ch == 0xFA) 
 		{
-			// 一些变量的初始化在这个阶段进行,因为这个阶段是数据帧判别的必经
-			// 路径,因此不需要在其他地方对这些变量进行初始化
+			// Initialize some variables at this stage, because at this stage is the data frame determination to go through
+			// the path. It is not necessary elsewhere on these variables.
 			uart3_buf.buf[uart3_buf.w_idx][0] = 0xFA;
 			uart3_buf.buf[uart3_buf.w_idx][1] = 0xFA;
 			uart3_buf.flag = 2;
